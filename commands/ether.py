@@ -36,10 +36,13 @@ def transfer(rpc, priv, sender, index, to, amount, ks, pw):
     Transfer ether from sender account to receiver account
     """
 
-    sender = utils.get_account(ks, priv, sender, index, pw)
-    # change ether to uint in wei.
-    value = Web3.toWei(amount, 'ether')
-    TxManager(rpc).transfer_ether(sender, to, value)
+    try:
+        sender = utils.get_account(ks, priv, sender, index, pw)
+        # change ether to uint in wei.
+        value = Web3.toWei(amount, 'ether')
+        TxManager(rpc).transfer_ether(sender, to, value)
+    except:
+        print("Transfer failed")
 
 
 @click.command()

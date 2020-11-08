@@ -1,5 +1,6 @@
 from eth_account import Account
 from pkg.keystore import KeyStore
+import click
 import pprint
 
 pp = pprint.PrettyPrinter(indent=4)
@@ -7,16 +8,16 @@ pp = pprint.PrettyPrinter(indent=4)
 
 def get_account(ks, priv, address, index, pw):
     if priv is not None:
-        account = Account.from_key(priv)
+        return Account.from_key(priv)
     else:
         accounts = KeyStore(ks)
         if address is not None:
-            account = accounts.decrypt_account_by_address(address, pw)
+            return accounts.decrypt_account_by_address(address, pw)
 
         if index is not None:
             index = int(index)
-            account = accounts.decrypt_account_by_index(index, pw)
-    return account
+            return accounts.decrypt_account_by_index(index, pw)
+    click.UsageError("Can't find a account to use")
 
 
 def pretty_print_dict(dict_data):

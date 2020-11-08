@@ -1,4 +1,6 @@
 import click
+from web3.exceptions import TransactionNotFound
+
 import commands.options as options
 import pkg.utils as utils
 from pkg.txmanager import TxManager
@@ -53,7 +55,11 @@ def send(rpc, ks, priv, sender, index, pw, to, amount, data, gas, gas_price):
         'gasPrice': int(gas_price),
         'data': data,
     }
-    TxManager(rpc).send_transaction(sender, tx)
+
+    try:
+        TxManager(rpc).send_transaction(sender, tx)
+    except ValueError as e:
+        print("Send tx failed")
 
 
 # get details of a transaction
@@ -64,8 +70,11 @@ def get(rpc, tx):
     Get detail info of ethereum transaction
     """
 
-    info = TxManager(rpc).get_transaction_info(tx)
-    utils.pretty_print_dict(info)
+    try:
+        info = TxManager(rpc).get_transaction_info(tx)
+        utils.pretty_print_dict(info)
+    except TransactionNotFound:
+        print("Tx {} not found".format(tx))
 
 
 @click.command()
@@ -74,9 +83,13 @@ def receipt(rpc, tx):
     """
     Get receipt of ethereum transaction
     """
+    # validate tx
 
-    info = TxManager(rpc).get_transaction_receipt_info(tx)
-    print(info)
+    try:
+        info = TxManager(rpc).get_transaction_receipt_info(tx)
+        print(info)
+    except TransactionNotFound:
+        print("Tx receipt of {} not found".format(tx))
 
 
 tx.add_command(send)

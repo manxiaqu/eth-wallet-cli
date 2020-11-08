@@ -50,9 +50,11 @@ def transfer(rpc, priv, sender, index, to, amount, token, ks, pw):
     """
     Transfer erc20 token from sender to receiver
     """
-
-    account = utils.get_account(ks, priv, sender, index, pw)
-    TxManager(rpc).transfer_erc20_token(account, to, amount, token)
+    try:
+        account = utils.get_account(ks, priv, sender, index, pw)
+        TxManager(rpc).transfer_erc20_token(account, to, amount, token)
+    except:
+        print("Transfer failed")
 
 
 @click.command()
@@ -61,8 +63,12 @@ def deploy(rpc, priv, name, symbol, sender, index, ks, pw):
     """
     Deploy a new erc20 token to the network
     """
-    account = utils.get_account(ks, priv, sender, index, pw)
-    TxManager(rpc).deploy_erc20_token(account, name, symbol)
+
+    try:
+        account = utils.get_account(ks, priv, sender, index, pw)
+        TxManager(rpc).deploy_erc20_token(account, name, symbol)
+    except:
+        print("Deploy failed")
 
 
 @click.command()

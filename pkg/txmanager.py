@@ -58,9 +58,7 @@ class TxManager(object):
         sign_and_send_transaction(tx, sender.key, self.w3)
 
     def send_transaction(self, sender, tx):
-        print(sender.address)
         tx['nonce'] = self.w3.eth.getTransactionCount(sender.address)
-        print(tx)
         sign_and_send_transaction(tx, sender.key, self.w3)
 
     def get_balance(self, address):
