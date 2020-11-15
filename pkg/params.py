@@ -6,4 +6,4 @@ home_dir = str(Path.home())
 ks = ".eth_wallet_cli"
 default_ks = os.path.join(home_dir, ks)
 localURL = "http://127.0.0.1:8545"
-mnemonic_len = 1
+mnemonic_len = 12

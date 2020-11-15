@@ -17,8 +17,8 @@ def validate_mnemonic(ctx, param, value):
     """
     Check mnemonic is valid or not
     """
-    if value is None or value.split() != params.mnemonic_len:
-        raise click.UsageError("Invalid mnemonic: {}".format(value))
+    if value is None or len(value.split()) != params.mnemonic_len:
+        raise click.UsageError("Invalid mnemonic: {}, length isn't {}".format(value, params.mnemonic_len))
 
     return value
 
@@ -67,7 +67,7 @@ def validate_hash(ctx, param, value):
     except ValueError:
         raise click.UsageError("Invalid tx hash: {}".format(value))
     if len(value_bytes) != 32:
-        raise click.UsageError("Invalid tx hash: {}".format(value))
+        raise click.UsageError("Invalid tx hash: {}, bytes length not 32".format(value))
 
     return value
 

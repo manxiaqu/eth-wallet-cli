@@ -47,7 +47,7 @@ class KeyStore:
 
         # encrypt and save
         file_name = generate_key_file_name(acct.address)
-        self.encrypt_and_save(acct.key, pw, file_name)
+        self.encrypt_and_save(acct, pw, file_name)
 
         # print info of user account
         print_account_info(acct, mnemonic, os.path.join(self.path, file_name))
@@ -61,7 +61,7 @@ class KeyStore:
             return
 
         file_name = generate_key_file_name(acct.address)
-        self.encrypt_and_save(acct.key, pw, file_name)
+        self.encrypt_and_save(acct, pw, file_name)
 
         # print info of user account
         print_import_account_info("key", acct,
@@ -76,14 +76,16 @@ class KeyStore:
             return
 
         file_name = generate_key_file_name(acct.address)
-        self.encrypt_and_save(acct.key, pw, file_name)
+        self.encrypt_and_save(acct, pw, file_name)
 
         # print info of user account
         print_import_account_info("mnemonic", acct,
                                   os.path.join(self.path, file_name))
 
-    def encrypt_and_save(self, key, pw, name):
-        encrypted = Account.encrypt(key, pw)
+    def encrypt_and_save(self, account, pw, name):
+        encrypted = Account.encrypt(account.key, pw)
+
+        self.accounts[account.address] = encrypted
 
         f = open(os.path.join(self.path, name), "w")
         f.write(json.dumps(encrypted))
