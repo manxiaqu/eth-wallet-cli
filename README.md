@@ -27,6 +27,14 @@
 
 请保证电脑上安装有python3、pip。
 
+- 本地测试: 请安装[Ganache-cli](https://github.com/trufflesuite/ganache-cli).
+- 以太坊测试链: 请保证你的钱包中至少一个1个以上的eth（测试币），并有可以使用的rpc地址。(建议使用infura)
+
+安装ganache-cli:
+```bash
+npm install -g ganache-cli
+```
+
 安装依赖包:
 ```bash
 cd $代码目录
