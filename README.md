@@ -25,7 +25,7 @@
     
 ## 测试运行
 
-请保证电脑上安装有python3、pip。
+请保证电脑上安装有python3、pip3。
 
 - 本地测试: 请安装[Ganache-cli](https://github.com/trufflesuite/ganache-cli).
 - 以太坊测试链: 请保证你的钱包中至少一个1个以上的eth（测试币），并有可以使用的rpc地址。(建议使用infura)
@@ -35,16 +35,25 @@
 npm install -g ganache-cli
 ```
 
+运行测试链:
+```bash
+ganache-cli
+```
+
 安装依赖包:
 ```bash
 cd $代码目录
-pip install -r requirements.txt
+pip3 install web3 click eth-account
 ```
 
 运行命令:
 ```bash
 python cmd.py --help
 ```
+
+请注意: **在发送交易时，需要发送方有一定的ether运用支付手续费。这里可以使用以太坊测试链生成的账户(Private Keys)，并使用--priv参数传递即可**:
+
+![](./img/ganache.png)
     
 ## 命令列表
 

@@ -49,7 +49,7 @@ def send(rpc, ks, priv, sender, index, pw, to, amount, data, gas, gas_price):
     if data is None:
         data = ''
     tx = {
-        'to': to,
+        'to': Web3.toChecksumAddress(to),
         'value': value,
         'gas': int(gas),
         'gasPrice': int(gas_price),
