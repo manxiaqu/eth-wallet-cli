@@ -27,7 +27,9 @@
 
 请保证电脑上安装有python3(>=3.5)、pip3。
 
-- 本地测试: 请安装[Ganache-cli](https://github.com/trufflesuite/ganache-cli).
+- 本地测试: 
+    - 请安装[Ganache-cli](https://github.com/trufflesuite/ganache-cli)
+    - 或者安装[Ganache](https://github.com/trufflesuite/ganache)
 - 以太坊测试链: 请保证你的钱包中至少一个1个以上的eth（测试币），并有可以使用的rpc地址。(建议使用infura)
 
 安装ganache-cli:
