@@ -29,7 +29,9 @@ class TxManager(object):
 
     def transfer_erc20_token(self, sender, to, amount, token):
         # get token decimal and convert amount in same uint
-        token_ins = self.w3.eth.contract(address=token, abi=TokenContract.erc20_abi)
+        token = Web3.toChecksumAddress(token)
+        token_ins = self.w3.eth.contract(
+            address=token, abi=TokenContract.erc20_abi)
         decimals = token_ins.functions.decimals().call()
 
         value = int(amount) * (10**decimals)
@@ -131,4 +133,5 @@ def sign_and_send_transaction(tx, key, w3):
     # check this is a contract creation tx or not
 
     if tx_receipt['contractAddress'] is not None:
-        print("Successfully create contract: {}".format(tx_receipt['contractAddress']))
+        print("Successfully create contract: {}".format(
+            tx_receipt['contractAddress']))

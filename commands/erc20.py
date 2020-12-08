@@ -53,7 +53,8 @@ def transfer(rpc, priv, sender, index, to, amount, token, ks, pw):
     try:
         account = utils.get_account(ks, priv, sender, index, pw)
         TxManager(rpc).transfer_erc20_token(account, to, amount, token)
-    except:
+    except Exception as e:
+        print(e)
         print("Transfer failed")
 
 
@@ -80,7 +81,8 @@ def get_balance(rpc, token, account):
 
     balance, symbol = TxManager(rpc).get_erc20_token_balance(token, account)
     symbol = symbol.decode("utf-8")
-    print("The balance of account {} of erc20 token {} is {} {}".format(account, token, balance, symbol))
+    print("The balance of account {} of erc20 token {} is {} {}".format(
+        account, token, balance, symbol))
 
 
 @click.command()
@@ -92,7 +94,8 @@ def total_supply(rpc, token):
 
     balance, symbol = TxManager(rpc).get_total_supply(token)
     symbol = symbol.decode("utf-8")
-    print("The total supply of erc20 token {} is {} {}".format(token, balance, symbol))
+    print("The total supply of erc20 token {} is {} {}".format(
+        token, balance, symbol))
 
 
 erc20.add_command(transfer)
